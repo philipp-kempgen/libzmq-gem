@@ -1,5 +1,16 @@
+zmq_version=2.1.9
+
 all:
-	cd zeromq-2.1.9 && ./configure && $(MAKE) $@
+	cd zeromq-$(zmq_version) && ./configure && $(MAKE) $@
 
 install:
-	cp zeromq-2.1.9/src/.libs/libzmq.so ..
+	[  -e zeromq-$(zmq_version)/src/.libs/libzmq.so \
+	-o -e zeromq-$(zmq_version)/src/.libs/libzmq.dylib \
+	]
+	
+	[ ! -e zeromq-$(zmq_version)/src/.libs/libzmq.so ] \
+	|| cp  zeromq-$(zmq_version)/src/.libs/libzmq.so ..
+	
+	[ ! -e zeromq-$(zmq_version)/src/.libs/libzmq.dylib ] \
+	|| cp  zeromq-$(zmq_version)/src/.libs/libzmq.dylib ..
+
